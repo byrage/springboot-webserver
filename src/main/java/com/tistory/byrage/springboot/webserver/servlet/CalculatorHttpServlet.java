@@ -1,11 +1,13 @@
 package com.tistory.byrage.springboot.webserver.servlet;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 
+@WebServlet
 public class CalculatorHttpServlet extends HttpServlet {
 
     @Override
