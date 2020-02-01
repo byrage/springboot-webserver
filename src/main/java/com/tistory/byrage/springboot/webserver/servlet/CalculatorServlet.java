@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import javax.servlet.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
 
 @Slf4j
 public class CalculatorServlet extends GenericServlet {
@@ -17,7 +16,6 @@ public class CalculatorServlet extends GenericServlet {
         int num2 = Integer.parseInt(req.getParameter("num2"));
 
         res.setContentType("text/plain");
-        res.setCharacterEncoding(StandardCharsets.UTF_8.name());
 
         PrintWriter writer = res.getWriter();
         writer.println("num1=" + num1 + ", num2=" + num2);

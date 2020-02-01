@@ -1,12 +1,14 @@
 package com.tistory.byrage.springboot.webserver.servlet;
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.charset.StandardCharsets;
 
+@Slf4j
 @WebServlet
 public class CalculatorHttpServlet extends HttpServlet {
 
@@ -16,7 +18,6 @@ public class CalculatorHttpServlet extends HttpServlet {
         int num2 = Integer.parseInt(req.getParameter("num2"));
 
         resp.setContentType("text/plain");
-        resp.setCharacterEncoding(StandardCharsets.UTF_8.name());
 
         PrintWriter writer = resp.getWriter();
         writer.println("num1=" + num1 + ", num2=" + num2);
