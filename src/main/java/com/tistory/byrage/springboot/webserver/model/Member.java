@@ -10,18 +10,10 @@ public class Member {
     private String name;
     private String email;
 
-    @Builder(access = AccessLevel.PRIVATE)
-    private Member(Long id, String name, String email) {
+    @Builder
+    public Member(Long id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
-    }
-
-    public static Member dummy(Long id) {
-        return Member.builder()
-                .id(id)
-                .name("test user")
-                .email("test@t.t")
-                .build();
     }
 }

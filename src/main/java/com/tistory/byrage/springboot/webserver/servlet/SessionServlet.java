@@ -1,6 +1,5 @@
 package com.tistory.byrage.springboot.webserver.servlet;
 
-import com.tistory.byrage.springboot.webserver.model.Member;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletException;
@@ -24,7 +23,7 @@ public class SessionServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        session.setAttribute(SESSION_NAME, Member.dummy(1L));
+        session.setAttribute(SESSION_NAME, req.getAttribute("member"));
         log.info("create session. memberSession={}", req.getSession().getAttribute(SESSION_NAME));
     }
 

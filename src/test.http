@@ -1,3 +1,4 @@
+## session test
 ### show session
 GET localhost:8080/test/session
 
@@ -6,5 +7,16 @@ POST localhost:8080/test/session
 
 ### delete session
 DELETE localhost:8080/test/session
+
+
+## dispatch servlet test
+### calcualtor
+GET localhost:8080/calc.test?num1=5&num2=3
+
+### show session
+GET localhost:8080/test/session.test?id=1&name=ds&email=tt@t.t
+
+### create session
+POST localhost:8080/test/session.test?id=1&name=ds&email=tt@t.t
 
 ###
