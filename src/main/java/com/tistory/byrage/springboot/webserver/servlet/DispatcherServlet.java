@@ -1,5 +1,7 @@
 package com.tistory.byrage.springboot.webserver.servlet;
 
+import com.tistory.byrage.springboot.webserver.controller.CalculatorController;
+import com.tistory.byrage.springboot.webserver.controller.SessionController;
 import com.tistory.byrage.springboot.webserver.model.Member;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,22 +21,33 @@ public class DispatcherServlet extends HttpServlet {
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         log.info("[DispatchServlet] requestURI={}", req.getRequestURI());
-        if (("/calc" + DISPATCHER_SERVLET_SUFFIX).equals(req.getServletPath())) {
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/calc");
-            requestDispatcher.include(req, resp);
+        if ((CalculatorController.PATH + DISPATCHER_SERVLET_SUFFIX).equals(req.getServletPath())) {
+            CalculatorController calculatorController = new CalculatorController();
+            String viewName = calculatorController.execute(req, resp);
+            dispatchRequest(CalculatorController.PATH, viewName, req, resp);
             return;
         }
 
-        if (("/test/session" + DISPATCHER_SERVLET_SUFFIX).equals(req.getServletPath())) {
+        if ((SessionController.PATH + DISPATCHER_SERVLET_SUFFIX).equals(req.getServletPath())) {
+            SessionController sessionController = new SessionController();
             Member member = Member.builder()
                     .id(Long.valueOf(req.getParameter("id")))
                     .name(req.getParameter("name"))
                     .email(req.getParameter("email"))
                     .build();
             req.setAttribute("member", member);
-            RequestDispatcher requestDispatcher = req.getRequestDispatcher("/test/session");
+            String viewName = sessionController.execute(req, resp);
+            dispatchRequest(SessionController.PATH, viewName, req, resp);
+        }
+    }
+
+    private void dispatchRequest(String url, String viewName, HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher(url);
+        if (viewName == null || "".equals(viewName)) {
             requestDispatcher.include(req, resp);
             return;
         }
+
+        resp.sendRedirect("redirect://" + viewName);
     }
 }
