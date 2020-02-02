@@ -1,0 +1,10 @@
+### show session
+GET localhost:8080/test/session
+
+### create session
+POST localhost:8080/test/session
+
+### delete session
+DELETE localhost:8080/test/session
+
+###
